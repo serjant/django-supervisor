@@ -375,3 +375,13 @@ class OnDemandStringIO(object):
         if not line:
             self._fp = None
         return line
+
+    def __iter__(self):
+        self._fp = None
+        return self
+
+    def __next__(self, *args, **kwds):
+        line = self.readline(*args, **kwds)
+        if not line:
+            raise StopIteration
+        return line
