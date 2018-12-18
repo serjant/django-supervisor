@@ -320,7 +320,9 @@ class Command(BaseCommand):
             #  Get the directory containing that module.
             #  This is deliberately casting a wide net.
             try:
-                dirnm = os.path.dirname(mod.__file__)
+                if mod.__file__:
+                    dirnm = os.path.dirname(mod.__file__)
+                raise AttributeError()
             except AttributeError:
                 continue
             #  Normalize it for comparison purposes.
